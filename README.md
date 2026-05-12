@@ -132,6 +132,6 @@ This fork is installed as the document-workbench service for the rule26 legal AI
 - **Secrets:** Infisical project `rule26/mike` (env=prod). Regenerated into `.env` at deploy time by `scripts/deploy.sh`.
 - **Non-secret config:** `.env.defaults` (committed).
 - **Sibling integration:** sibling rule26 services (folio-enrich, case-brain, …) call the backend at `http://10.77.1.181:8095`.
-- **One-line deploy:** `./scripts/deploy.sh` from `~/projects/legal-tech/mike` on ai-server.
+- **One-line deploy:** `./scripts/deploy.sh` from `~/svc/rule26/mike` on ai-server.
 
 Upstream tracks the original project: `git fetch upstream && git merge upstream/main`.

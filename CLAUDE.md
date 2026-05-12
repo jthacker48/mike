@@ -33,7 +33,7 @@ For containerized deploys, the per-service env files are bypassed — `docker-co
 | **Backend port** | `8095` → container `3001` |
 | **Public UI URL** | `http://10.77.1.181:8094/` |
 | **Backend health** | `http://10.77.1.181:8095/health` |
-| **Repo on server** | `~/projects/legal-tech/mike` |
+| **Repo on server** | `~/svc/rule26/mike` |
 | **Data backends** | Supabase (hosted, project `mike`) + Cloudflare R2 (bucket `mike`) |
 | **Config** | `.env.defaults` (committed, non-secret) |
 | **Secrets** | Infisical project `rule26/mike` (UUID set in `scripts/deploy.sh`), env `prod`. Fetched into `.env` at deploy time. |
@@ -42,7 +42,7 @@ For containerized deploys, the per-service env files are bypassed — `docker-co
 Deploy / restart:
 ```bash
 ssh ai-server
-cd ~/projects/legal-tech/mike
+cd ~/svc/rule26/mike
 ./scripts/deploy.sh       # pulls latest, regenerates .env, rebuilds, waits for /health
 docker compose logs -f    # tail
 docker compose logs -f mike-backend
