@@ -21,6 +21,17 @@ RUN npm ci --legacy-peer-deps
 COPY . .
 RUN npm run build
 
+# Transpile next.config.ts → next.config.js so the runtime stage doesn't
+# need TypeScript installed to parse the config at startup.
+RUN node -e "\
+  const ts = require('typescript'); \
+  const fs = require('fs'); \
+  const src = fs.readFileSync('next.config.ts', 'utf8'); \
+  const result = ts.transpileModule(src, { \
+    compilerOptions: { module: ts.ModuleKind.CommonJS, esModuleInterop: true } \
+  }); \
+  fs.writeFileSync('next.config.js', result.outputText);"
+
 RUN npm prune --omit=dev --legacy-peer-deps
 
 
@@ -38,7 +49,7 @@ RUN groupadd --system app && useradd --system --gid app --home-dir /home/app --c
 
 WORKDIR /app
 
-COPY --from=builder --chown=app:app /app/package.json /app/package-lock.json /app/next.config.ts ./
+COPY --from=builder --chown=app:app /app/package.json /app/package-lock.json /app/next.config.js ./
 COPY --from=builder --chown=app:app /app/node_modules ./node_modules
 COPY --from=builder --chown=app:app /app/.next ./.next
 COPY --from=builder --chown=app:app /app/public ./public
