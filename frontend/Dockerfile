@@ -21,7 +21,7 @@ RUN npm ci --legacy-peer-deps
 COPY . .
 RUN npm run build
 
-RUN npm prune --omit=dev
+RUN npm prune --omit=dev --legacy-peer-deps
 
 
 FROM node:20-bookworm-slim AS runtime
