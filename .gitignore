@@ -9,6 +9,14 @@ build
 .env.*
 !.env.example
 !.env.local.example
+!.env.defaults
+
+# Deploy artifacts written by scripts/deploy.sh while regenerating .env
+.env.bak
+.env.tmp
+
+# Per-session Claude Code harness state (working directory metadata)
+.claude/
 
 *.log
 *.tsbuildinfo

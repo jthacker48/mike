@@ -121,3 +121,17 @@ npm run build --prefix backend
 npm run build --prefix frontend
 npm run lint --prefix frontend
 ```
+
+---
+
+## rule26 Deployment
+
+This fork is installed as the document-workbench service for the rule26 legal AI platform. See [CLAUDE.md](./CLAUDE.md) and [docs/rule26-integration.md](./docs/rule26-integration.md) for the rule26-specific deployment and integration story:
+
+- **Deploy target:** ai-server (10.77.1.181), docker-compose, ports `8094` (frontend) + `8095` (backend).
+- **Secrets:** Infisical project `rule26/mike` (env=prod). Regenerated into `.env` at deploy time by `scripts/deploy.sh`.
+- **Non-secret config:** `.env.defaults` (committed).
+- **Sibling integration:** sibling rule26 services (folio-enrich, case-brain, …) call the backend at `http://10.77.1.181:8095`.
+- **One-line deploy:** `./scripts/deploy.sh` from `~/projects/legal-tech/mike` on ai-server.
+
+Upstream tracks the original project: `git fetch upstream && git merge upstream/main`.
